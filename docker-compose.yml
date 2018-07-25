@@ -1,38 +1,50 @@
 version: "3"
 services:
+
   couchbase1: 
     image: couchbase
-    restart: always
-    volumes: 
-      - .:/usr/share/couchbase
-    working_dir: /usr/share/couchbase
     ports: 
       - 8091:8091
       - 8092:8092
       - 8093:8093
       - 8094:8094
       - 11210:11210
-  couchbase2: 
-    image: couchbase
     restart: always
     volumes: 
       - .:/usr/share/couchbase
     working_dir: /usr/share/couchbase
+
+  couchbase2: 
+    image: couchbase
     ports: 
       - 9091:8091
       - 9092:8092
       - 9093:8093
       - 9094:8094
-  couchbase3: 
-    image: couchbase
+      - 11211:11210
     restart: always
     volumes: 
       - .:/usr/share/couchbase
     working_dir: /usr/share/couchbase
+
+  couchbase3: 
+    image: couchbase
     ports: 
       - 7091:8091
       - 7092:8092
       - 7093:8093
       - 7094:8094
+      - 11212:11210
+    restart: always
+    volumes: 
+      - .:/usr/share/couchbase
+    working_dir: /usr/share/couchbase
 
-
+  pep-loader-api:
+    build: .
+    command: npm start
+    restart: always
+    volumes: 
+      - .:/usr/src/apps/
+    working_dir: /usr/src/apps/
+    
