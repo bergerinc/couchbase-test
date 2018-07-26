@@ -43,7 +43,4 @@ services:
   pep-loader-api:
     build: .
     restart: always
-    volumes: 
-      - .:/usr/src/apps/
-    working_dir: /usr/src/apps/
     

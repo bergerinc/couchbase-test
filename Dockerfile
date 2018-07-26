@@ -7,9 +7,9 @@ LABEL maintainer="Bill.Berger"
 
 
 # set working directory to app directory
-RUN apk update && apk add python g++ make && rm -rf /var/cache/apk/*
-RUN mkdir -p /usr/src/pep-loader
-WORKDIR /usr/src/pep-loader
+RUN sudo apk update && apk add python g++ make && rm -rf /var/cache/apk/*
+RUN sudo mkdir -p /usr/src/pep-loader
+WORKDIR /usr/src/apps/pep-loader
 
 # package files in separate step to support caching
 COPY package*.json ./
@@ -28,4 +28,4 @@ COPY . .
 EXPOSE 8080
 
 # start application
-#CMD ["npm", "start"]
+CMD ["npm", "start"]
