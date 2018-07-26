@@ -7,8 +7,8 @@ LABEL maintainer="Bill.Berger"
 
 
 # set working directory to app directory
-RUN sudo apk update && apk add python g++ make && rm -rf /var/cache/apk/*
-RUN sudo mkdir -p /usr/src/pep-loader
+RUN apk update && apk add python g++ make && rm -rf /var/cache/apk/*
+RUN mkdir -p /usr/src/pep-loader
 WORKDIR /usr/src/apps/pep-loader
 
 # package files in separate step to support caching
