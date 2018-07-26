@@ -42,8 +42,3 @@ services:
     volumes: 
       - .:/usr/share/couchbase
     working_dir: /usr/share/couchbase
-
-  pep-loader-api:
-    build: .
-    restart: always
-    
