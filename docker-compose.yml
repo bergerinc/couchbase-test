@@ -2,9 +2,7 @@ version: "3"
 services:
 
   couchbase1: 
-    image: couchbase
-    networks: 
-      - couchbase-net
+    image: couchbase/server
     ports:
       - 53:53 
       - 8091:8091
@@ -18,9 +16,7 @@ services:
     working_dir: /usr/share/couchbase
 
   couchbase2: 
-    image: couchbase
-    networks: 
-      - couchbase-net
+    image: couchbase/server
     ports: 
       - 55:53
       - 9091:8091
@@ -34,9 +30,7 @@ services:
     working_dir: /usr/share/couchbase
 
   couchbase3: 
-    image: couchbase
-    networks: 
-      - couchbase-net
+    image: couchbase/server
     ports: 
       - 54:53
       - 7091:8091
