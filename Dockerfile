@@ -19,6 +19,7 @@ ENV PORT 8080
 ENV COUCHBASE_HOST 127.0.0.1
 
 # install application dependencies
+RUN npm i -g forever
 RUN npm i --production
 
 # copy application files
@@ -28,4 +29,4 @@ COPY . .
 EXPOSE 8080
 
 # start application
-CMD ["npm", "start"]
+CMD ["forever", "app.js"]
