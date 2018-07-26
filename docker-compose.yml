@@ -42,7 +42,6 @@ services:
 
   pep-loader-api:
     build: .
-    command: npm start
     restart: always
     volumes: 
       - .:/usr/src/apps/
