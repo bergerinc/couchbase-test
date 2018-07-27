@@ -13,8 +13,10 @@ app.use(bodyParser.urlencoded({ extended:true }));
 
 //couchbase
 const cbHost = process.env.COUCHBASE_HOST;
+const cbAdminName = process.env.COUCHBASE_ADMIN_USER;
+const cbAdminPass = process.env.COUCHBASE_ADMIN_PASS;
 const cluster = new couchbase.Cluster(cbHost);
-cluster.authenticate('Administrator', 'P@ssword1');
+cluster.authenticate(cbAdminName, cbAdminPass);
 
 //routes
 app.get('/pep/:bucket/:id', (req, res)=>{
@@ -25,14 +27,14 @@ app.get('/pep/:bucket/:id', (req, res)=>{
 		thisBucket.get(req.params.id, (error, result)=>{
 
 			if(error){
-				res.status(500).send(error).end();
+				res.status(500).send(error);
 				console.log(error);
 			}
 			res.send(result);
 		});
 
 	} catch(err) {
-		res.status(500).send(err).end();
+		console.log(err);
 	}
 	
 });
@@ -47,7 +49,7 @@ app.post('/pep', (req, res)=>{
 		const pp = new processPep(thisBucket);
 		pp.addRecordsFromFile(doc, path.join(dataFolder, doc), (error, status) => {
 			if(error){
-				res.status(500).send(error).end();
+				res.status(500).send(error);
 				console.log(error);
 			} else {
 				res.send(status).end();
@@ -55,7 +57,6 @@ app.post('/pep', (req, res)=>{
 			}
 		});
 	} catch(err) {
-		res.status(500).send(err).end();
 		console.log(err);
 	}
 	
@@ -70,7 +71,7 @@ app.delete('/pep/:bucket', (req, res)=>{
 		const pp = new processPep(thisBucket);
 		pp.deleteBucketContents((error, status) => {
 			if(error){
-				res.status(500).send(error).end();
+				res.status(500).send(error);
 				console.log(error);
 			} else {
 				res.send(status).end();
@@ -79,7 +80,6 @@ app.delete('/pep/:bucket', (req, res)=>{
 		});
 
 	} catch (err) {
-		req.status(500).send(err).end();
 		console.log(err);
 	}
 
@@ -87,7 +87,7 @@ app.delete('/pep/:bucket', (req, res)=>{
 
 
 //listener
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, ()=>{
 	console.log(`Application listening on port ${ port }...`);
 });

@@ -1,11 +1,6 @@
 # base from small linux/node image
 FROM node:8-alpine
 
-LABEL version="1.0"
-LABEL description="Simple node app to load pep data and flush pep data in couchbase."
-LABEL maintainer="Bill.Berger"
-
-
 # set working directory to app directory
 RUN apk update && apk add python g++ make && rm -rf /var/cache/apk/*
 RUN mkdir -p /usr/src/pep-loader
