@@ -8,5 +8,3 @@ docker-compose*
 README.md
 LICENSE
 .vscode
-couchbase-install
-demo-install-files
