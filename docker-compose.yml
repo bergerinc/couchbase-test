@@ -1,0 +1,120 @@
+version: "3.5"
+services:
+
+  couchbase1: 
+    container_name: cb1
+    command: /opt/couchbase/configure.sh
+    environment:
+      - COUCHBASE_ADMIN_USER=${COUCHBASE_ADMIN_USER}
+      - COUCHBASE_ADMIN_PWD=${COUCHBASE_ADMIN_PWD}
+      - COUCHBASE_BUCKET=${COUCHBASE_BUCKET}
+      - COUCHBASE_BUCKET_PWD=${COUCHBASE_BUCKET_PWD}
+    image: couchbase-custom
+    networks:
+      - couchbasevnet
+    ports:
+      - 8091:8091
+      - 8092:8092
+      - 8093:8093
+      - 8094:8094
+      - 11210:11210
+    restart: always
+
+  couchbase2: 
+    container_name: cb2
+    command: /opt/couchbase/configure.sh
+    environment:
+      - COUCHBASE_ADMIN_USER=${COUCHBASE_ADMIN_USER}
+      - COUCHBASE_ADMIN_PWD=${COUCHBASE_ADMIN_PWD}
+      - COUCHBASE_BUCKET=${COUCHBASE_BUCKET}
+      - COUCHBASE_BUCKET_PWD=${COUCHBASE_BUCKET_PWD}
+    image: couchbase-custom
+    networks:
+      - couchbasevnet
+    ports: 
+      - 9091:8091
+      - 9092:8092
+      - 9093:8093
+      - 9094:8094
+      - 11211:11210
+    restart: always
+
+  couchbase3: 
+    container_name: cb3
+    command: /opt/couchbase/configure.sh
+    environment:
+      - COUCHBASE_ADMIN_USER=${COUCHBASE_ADMIN_USER}
+      - COUCHBASE_ADMIN_PWD=${COUCHBASE_ADMIN_PWD}
+      - COUCHBASE_BUCKET=${COUCHBASE_BUCKET}
+      - COUCHBASE_BUCKET_PWD=${COUCHBASE_BUCKET_PWD}
+    image: couchbase-custom
+    networks:
+      - couchbasevnet
+    ports: 
+      - 7091:8091
+      - 7092:8092
+      - 7093:8093
+      - 7094:8094
+      - 11212:11210
+    restart: always
+
+  couchbase4: 
+    container_name: cb4
+    command: /opt/couchbase/configure.sh
+    environment:
+      - COUCHBASE_ADMIN_USER=${COUCHBASE_ADMIN_USER}
+      - COUCHBASE_ADMIN_PWD=${COUCHBASE_ADMIN_PWD}
+      - COUCHBASE_BUCKET=${COUCHBASE_BUCKET}
+      - COUCHBASE_BUCKET_PWD=${COUCHBASE_BUCKET_PWD}
+    image: couchbase-custom
+    networks:
+      - couchbasevnet
+    ports: 
+      - 10091:8091
+      - 10092:8092
+      - 10093:8093
+      - 10094:8094
+      - 11213:11210
+    restart: always
+
+  couchbase5: 
+    container_name: cb5
+    command: /opt/couchbase/configure.sh
+    environment:
+      - COUCHBASE_ADMIN_USER=${COUCHBASE_ADMIN_USER}
+      - COUCHBASE_ADMIN_PWD=${COUCHBASE_ADMIN_PWD}
+      - COUCHBASE_BUCKET=${COUCHBASE_BUCKET}
+      - COUCHBASE_BUCKET_PWD=${COUCHBASE_BUCKET_PWD}
+    image: couchbase-custom
+    networks:
+      - couchbasevnet
+    ports: 
+      - 11091:8091
+      - 11092:8092
+      - 11093:8093
+      - 11094:8094
+      - 11214:11210
+    restart: always
+
+  nodeApiPEPLoader:
+    container_name: pep-loader
+    command: forever app.js
+    environment:
+     - COUCHBASE_ADMIN_USER=${COUCHBASE_ADMIN_USER}
+     - COUCHBASE_ADMIN_PWD=${COUCHBASE_ADMIN_PWD}
+     - COUCHBASE_BUCKET=${COUCHBASE_BUCKET}
+     - COUCHBASE_BUCKET_PWD=${COUCHBASE_BUCKET_PWD}
+     - COUCHBASE_HOST=${COUCHBASE_HOST}
+     - PORT=${PORT}
+     - NODE_ENV=${NODE_ENV}
+    image: couch-pep-loader
+    networks:
+     - couchbasevnet
+    ports:
+     - 8080:8080
+    restart: always
+    working_dir: /usr/src/apps/pep-loader
+
+networks:
+  couchbasevnet:
+   name: couchbasevnet

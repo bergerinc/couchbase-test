@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended:true }));
 //couchbase
 const cbHost = process.env.COUCHBASE_HOST;
 const cbAdminName = process.env.COUCHBASE_ADMIN_USER;
-const cbAdminPass = process.env.COUCHBASE_ADMIN_PASS;
+const cbAdminPass = process.env.COUCHBASE_ADMIN_PWD;
 const cluster = new couchbase.Cluster(cbHost);
 cluster.authenticate(cbAdminName, cbAdminPass);
 
